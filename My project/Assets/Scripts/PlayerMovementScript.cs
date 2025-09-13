@@ -48,7 +48,7 @@ public class PlayerMovementScript : MonoBehaviour
             animator.SetBool("isIdleLeft", false);
         }
 
-        if (Input.GetKeyDown("d"))
+        if (Input.GetKeyDown("d") )
         {
             animator.SetBool("isIdleRight", true);
         }
