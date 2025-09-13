@@ -1,4 +1,3 @@
-# Game-1
 #RogueLike Dungeon Crawler (Currently No Name)
 This game is a passion project 
 
