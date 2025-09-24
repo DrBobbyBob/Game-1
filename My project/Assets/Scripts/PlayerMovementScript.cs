@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class PlayerMovementScript : MonoBehaviour
 {
@@ -18,8 +20,8 @@ public class PlayerMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float xInput = Input.GetAxis("Horizontal");
-        float yInput = Input.GetAxis("Vertical");
+        float xInput = UnityEngine.Input.GetAxis("Horizontal");
+        float yInput = UnityEngine.Input.GetAxis("Vertical");
 
         if (Mathf.Abs(xInput) > 0)
         {
@@ -30,35 +32,14 @@ public class PlayerMovementScript : MonoBehaviour
             body.linearVelocity = new Vector2(body.linearVelocity.x, yInput*speed);
         }
 
-        if (Input.GetKeyDown("w"))
-        {
-            animator.SetBool("isIdleUp", true);
-        }
-        else if (Input.GetKeyDown("s") || Input.GetKeyDown("a") || Input.GetKeyDown("d"))
-        {
-            animator.SetBool("isIdleUp", false);
-        }
 
-        if (Input.GetKeyDown("a"))
-        {
-            animator.SetBool("isIdleLeft", true);
-        }
-        else if (Input.GetKeyDown("s") || Input.GetKeyDown("w") || Input.GetKeyDown("d"))
-        {
-            animator.SetBool("isIdleLeft", false);
-        }
+        idle();
 
-        if (Input.GetKeyDown("d") )
-        {
-            animator.SetBool("isIdleRight", true);
-        }
-        else if (Input.GetKeyDown("s") || Input.GetKeyDown("a") || Input.GetKeyDown("w"))
-        {
-            animator.SetBool("isIdleRight", false);
-        }
+        move(yInput, xInput);
+    }
 
-        
-
+    void move(float yInput, float xInput)
+    {
         if (yInput < 0)
         {
             animator.SetBool("isRunningDown", true);
@@ -66,6 +47,72 @@ public class PlayerMovementScript : MonoBehaviour
         else
         {
             animator.SetBool("isRunningDown", false);
+        }
+
+        if (yInput > 0)
+        {
+            animator.SetBool("isRunningUp", true);
+        }
+        else
+        {
+            animator.SetBool("isRunningUp", false);
+        }
+
+        if (xInput > 0)
+        {
+            animator.SetBool("isRunningRight", true);
+        }
+        else
+        {
+            animator.SetBool("isRunningRight", false);
+        }
+
+        if (xInput < 0)
+        {
+            animator.SetBool("isRunningLeft", true);
+        }
+        else
+        {
+            animator.SetBool("isRunningLeft", false);
+        }
+    }
+
+    void idle()
+    {
+        if (UnityEngine.Input.GetKeyDown("w"))
+        {
+            animator.SetBool("isIdleUp", true);
+        }
+        else if (UnityEngine.Input.GetKeyDown("s") || UnityEngine.Input.GetKeyDown("a") || UnityEngine.Input.GetKeyDown("d"))
+        {
+            animator.SetBool("isIdleUp", false);
+        }
+
+        if (UnityEngine.Input.GetKeyDown("a"))
+        {
+            animator.SetBool("isIdleLeft", true);
+        }
+        else if (UnityEngine.Input.GetKeyDown("s") || UnityEngine.Input.GetKeyDown("w") || UnityEngine.Input.GetKeyDown("d"))
+        {
+            animator.SetBool("isIdleLeft", false);
+        }
+
+        if (UnityEngine.Input.GetKeyDown("d"))
+        {
+            animator.SetBool("isIdleRight", true);
+        }
+        else if (UnityEngine.Input.GetKeyDown("s") || UnityEngine.Input.GetKeyDown("a") || UnityEngine.Input.GetKeyDown("w"))
+        {
+            animator.SetBool("isIdleRight", false);
+        }
+
+        if (UnityEngine.Input.GetKeyDown("s"))
+        {
+            animator.SetBool("isIdleDown", true);
+        }
+        else if (UnityEngine.Input.GetKeyDown("a") || UnityEngine.Input.GetKeyDown("d") || UnityEngine.Input.GetKeyDown("w"))
+        {
+            animator.SetBool("isIdleDown", false);
         }
     }
 }
