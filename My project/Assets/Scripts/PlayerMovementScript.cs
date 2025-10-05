@@ -20,22 +20,24 @@ public class PlayerMovementScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float xInput = UnityEngine.Input.GetAxis("Horizontal");
-        float yInput = UnityEngine.Input.GetAxis("Vertical");
-
-        if (Mathf.Abs(xInput) > 0)
+        if(!(animator.GetBool("isBlockDown") || animator.GetBool("isBlockUp") || animator.GetBool("isBlockLeft") || animator.GetBool("isBlockRight") || animator.GetBool("isSweepDown") || animator.GetBool("isSweepRight") || animator.GetBool("isSweepLeft") || animator.GetBool("isSweepUp")))
         {
-            body.linearVelocity = new Vector2(xInput*speed, body.linearVelocity.y);
-        }
-        if (Mathf.Abs(yInput) > 0)
-        {
-            body.linearVelocity = new Vector2(body.linearVelocity.x, yInput*speed);
-        }
+            float xInput = UnityEngine.Input.GetAxis("Horizontal");
+            float yInput = UnityEngine.Input.GetAxis("Vertical");
 
+            if (Mathf.Abs(xInput) > 0)
+            {
+                body.linearVelocity = new Vector2(xInput * speed, body.linearVelocity.y);
+            }
+            if (Mathf.Abs(yInput) > 0)
+            {
+                body.linearVelocity = new Vector2(body.linearVelocity.x, yInput * speed);
+            }
+
+            move(yInput, xInput);
+        }
 
         idle();
-
-        move(yInput, xInput);
     }
 
     void move(float yInput, float xInput)
