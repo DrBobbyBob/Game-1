@@ -8,8 +8,9 @@ public class PlayerMovementScript : MonoBehaviour
     [SerializeField]private SpriteRenderer spriteRenderer;
     [SerializeField]private Animator animator;
     public Rigidbody2D body;
+    public float sweepRange = 1f;
 
-    
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,8 +37,15 @@ public class PlayerMovementScript : MonoBehaviour
 
             move(yInput, xInput);
         }
+        else
+        {
+            animator.SetBool("isRunningDown", false);
+            animator.SetBool("isRunningUp", false);
+            animator.SetBool("isRunningRight", false);
+            animator.SetBool("isRunningLeft", false);
+        }
 
-        idle();
+            idle();
     }
 
     void move(float yInput, float xInput)
